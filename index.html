@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grid Social — Local Business Marketing, Ayrshire</title>
+  <meta name="description" content="Social media management, Google presence and websites for local businesses across Ayrshire. No jargon. No long contracts. Real results.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dark:    #0F172A;
+      --dark2:   #1E293B;
+      --blue:    #2563EB;
+      --blue-l:  #3B82F6;
+      --green:   #059669;
+      --green-l: #10B981;
+      --light:   #F8FAFC;
+      --mid:     #E2E8F0;
+      --text:    #1E293B;
+      --muted:   #64748B;
+      --white:   #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,23,42,0.97);
+      backdrop-filter: blur(8px);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-logo {
+      font-size: 1.25rem; font-weight: 700; color: var(--white);
+      letter-spacing: -0.02em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--blue-l); }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.7); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--blue); color: var(--white) !important;
+      padding: 0.45rem 1.1rem; border-radius: 6px;
+      font-weight: 600 !important; font-size: 0.85rem !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--blue-l) !important; }
+
+    /* ─── HERO ─── */
+    #hero {
+      background: var(--dark);
+      background-image:
+        linear-gradient(rgba(37,99,235,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37,99,235,0.08) 1px, transparent 1px);
+      background-size: 44px 44px;
+      padding: 7rem 5% 6rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(37,99,235,0.18), transparent);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(37,99,235,0.18);
+      color: var(--blue-l);
+      border: 1px solid rgba(37,99,235,0.35);
+      padding: 0.3rem 0.9rem;
+      border-radius: 99px;
+      font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    #hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      max-width: 760px;
+      margin: 0 auto 1.25rem;
+    }
+
+    #hero h1 em {
+      font-style: normal;
+      color: var(--blue-l);
+    }
+
+    #hero p {
+      color: rgba(255,255,255,0.65);
+      font-size: 1.15rem;
+      max-width: 540px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-buttons {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: var(--white);
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      font-size: 1rem; font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--blue-l); transform: translateY(-1px); }
+
+    .btn-secondary {
+      background: transparent;
+      color: rgba(255,255,255,0.8);
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      font-size: 1rem; font-weight: 600;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.5); color: var(--white); }
+
+    .hero-proof {
+      margin-top: 3.5rem;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 5rem 5%; }
+
+    .section-label {
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--blue);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--dark);
+      max-width: 560px;
+      line-height: 1.2;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin-top: 0.75rem;
+    }
+
+    .section-header { margin-bottom: 3rem; }
+    .section-header.center { text-align: center; }
+    .section-header.center .section-title,
+    .section-header.center .section-sub { max-width: 100%; }
+
+    /* ─── SERVICES ─── */
+    #services { background: var(--light); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: var(--white);
+      border: 1px solid var(--mid);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .service-card:hover {
+      box-shadow: 0 8px 30px rgba(15,23,42,0.08);
+      border-color: var(--blue-l);
+    }
+
+    .service-icon {
+      width: 48px; height: 48px;
+      background: rgba(37,99,235,0.1);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .service-card h3 {
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    /* ─── HOW IT WORKS ─── */
+    #how-it-works { background: var(--white); }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      position: relative;
+    }
+
+    .step {
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .step-num {
+      width: 52px; height: 52px;
+      background: var(--dark);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.1rem;
+      margin: 0 auto 1.25rem;
+    }
+
+    .step h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .step p { color: var(--muted); font-size: 0.9rem; }
+
+    /* ─── WHY GRID SOCIAL ─── */
+    #why {
+      background: var(--dark);
+      background-image:
+        linear-gradient(rgba(37,99,235,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37,99,235,0.06) 1px, transparent 1px);
+      background-size: 44px 44px;
+      color: var(--white);
+    }
+
+    #why .section-title { color: var(--white); }
+    #why .section-sub { color: rgba(255,255,255,0.55); }
+    #why .section-label { color: var(--blue-l); }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .why-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 1.75rem;
+    }
+
+    .why-card .icon { font-size: 1.6rem; margin-bottom: 1rem; }
+    .why-card h3 { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+    .why-card p { color: rgba(255,255,255,0.55); font-size: 0.88rem; line-height: 1.6; }
+
+    /* ─── CASE STUDY ─── */
+    #case-study { background: var(--light); }
+
+    .case-study-box {
+      background: var(--white);
+      border: 1px solid var(--mid);
+      border-radius: 16px;
+      padding: 2.5rem 3rem;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .case-tag {
+      background: rgba(5,150,105,0.1);
+      color: var(--green);
+      border: 1px solid rgba(5,150,105,0.25);
+      padding: 0.25rem 0.75rem;
+      border-radius: 99px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .case-study-box h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .case-study-box .desc { color: var(--muted); margin-bottom: 2rem; }
+
+    .case-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      border-top: 1px solid var(--mid);
+      padding-top: 1.75rem;
+    }
+
+    .stat { text-align: center; }
+    .stat .num {
+      font-size: 2rem; font-weight: 800;
+      color: var(--blue);
+      letter-spacing: -0.03em;
+    }
+    .stat .label { color: var(--muted); font-size: 0.82rem; margin-top: 0.2rem; }
+
+    /* ─── PRICING ─── */
+    #pricing { background: var(--white); }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      border: 1px solid var(--mid);
+      border-radius: 14px;
+      padding: 2rem;
+      position: relative;
+      transition: box-shadow 0.2s;
+    }
+    .pricing-card:hover { box-shadow: 0 8px 30px rgba(15,23,42,0.08); }
+
+    .pricing-card.featured {
+      border-color: var(--blue);
+      background: var(--dark);
+      color: var(--white);
+    }
+
+    .featured-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--blue);
+      color: var(--white);
+      font-size: 0.72rem; font-weight: 700;
+      padding: 0.2rem 0.75rem;
+      border-radius: 99px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      white-space: nowrap;
+    }
+
+    .plan-name {
+      font-size: 0.8rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--blue);
+      margin-bottom: 0.5rem;
+    }
+    .pricing-card.featured .plan-name { color: var(--blue-l); }
+
+    .price {
+      font-size: 2.4rem; font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--dark);
+    }
+    .pricing-card.featured .price { color: var(--white); }
+    .price span { font-size: 1rem; font-weight: 500; color: var(--muted); }
+    .pricing-card.featured .price span { color: rgba(255,255,255,0.5); }
+
+    .plan-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin: 0.5rem 0 1.25rem;
+    }
+    .pricing-card.featured .plan-desc { color: rgba(255,255,255,0.55); }
+
+    .plan-features {
+      list-style: none;
+      margin-bottom: 1.75rem;
+    }
+
+    .plan-features li {
+      display: flex; align-items: flex-start; gap: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+    .pricing-card.featured .plan-features li { color: rgba(255,255,255,0.8); }
+
+    .check { color: var(--green-l); font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+    .btn-plan {
+      display: block;
+      text-align: center;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-plan-outline {
+      border: 1.5px solid var(--mid);
+      color: var(--dark);
+    }
+    .btn-plan-outline:hover { border-color: var(--blue); color: var(--blue); }
+
+    .btn-plan-filled {
+      background: var(--blue);
+      color: var(--white);
+    }
+    .btn-plan-filled:hover { background: var(--blue-l); }
+
+    /* ─── CONTACT ─── */
+    #contact {
+      background: var(--dark);
+      text-align: center;
+      padding: 5rem 5%;
+    }
+
+    #contact h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    #contact p {
+      color: rgba(255,255,255,0.55);
+      font-size: 1.05rem;
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .contact-options {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-pill {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 99px;
+      padding: 0.6rem 1.3rem;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.9rem; font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .contact-pill:hover {
+      background: rgba(255,255,255,0.12);
+      color: var(--white);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #050C1A;
+      padding: 1.5rem 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer .logo { font-size: 1rem; font-weight: 700; color: var(--white); }
+    footer .logo span { color: var(--blue-l); }
+    footer p { color: rgba(255,255,255,0.3); font-size: 0.8rem; }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .case-stats { grid-template-columns: 1fr 1fr; }
+      .case-study-box { padding: 1.75rem; }
+      section { padding: 3.5rem 5%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Grid<span>Social</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#case-study">Case Study</a></li>
+    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-badge">Ayrshire's Local Marketing Agency</div>
+  <h1>Your local business,<br><em>found online.</em></h1>
+  <p>Social media management, Google presence, and websites for small businesses across Ayrshire. No jargon. No long contracts. Just results.</p>
+  <div class="hero-buttons">
+    <a href="#contact" class="btn-primary">Get a free audit</a>
+    <a href="#services" class="btn-secondary">See what we do</a>
+  </div>
+  <p class="hero-proof">Serving businesses across Ayrshire &nbsp;·&nbsp; Company No. SC858624</p>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header">
+    <div class="section-label">What we do</div>
+    <h2 class="section-title">Everything you need to be found online</h2>
+    <p class="section-sub">We handle the digital side so you can focus on your trade.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">📍</div>
+      <h3>Google & Maps Presence</h3>
+      <p>We set up and optimise your Google Business Profile so you appear when local customers search. The single biggest thing you can do to get more calls.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">📱</div>
+      <h3>Social Media Management</h3>
+      <p>Regular, professional posts on Facebook and Instagram — photos of your work, local content, and updates that build trust with potential customers.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🌐</div>
+      <h3>Website Design & Build</h3>
+      <p>A clean, fast website that tells customers who you are, what you do, and how to reach you. Built for mobile, built for local search.</p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">📈</div>
+      <h3>Ongoing Monthly Management</h3>
+      <p>We keep everything ticking — posting, responding to reviews, updating your profiles, and sending you a monthly report so you always know where you stand.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="section-header center">
+    <div class="section-label">The process</div>
+    <h2 class="section-title">Up and running in a week</h2>
+    <p class="section-sub">We keep it simple. Three steps and your business is live online.</p>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Free Audit</h3>
+      <p>We check where your business stands online right now — Google, Facebook, reviews, competitors — and show you exactly what's missing.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>We Set Everything Up</h3>
+      <p>Google Business Profile, social profiles, photos, descriptions — we build the foundations your business needs to get found.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>We Keep It Growing</h3>
+      <p>Monthly management, regular posts, review collection, and reporting. Your online presence, handled — so you don't have to think about it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="section-header">
+    <div class="section-label">Why Grid Social</div>
+    <h2 class="section-title">Built for local businesses. Not big agencies.</h2>
+    <p class="section-sub">We work with trade businesses and small local companies. We know what matters.</p>
+  </div>
+
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="icon">📍</div>
+      <h3>Local knowledge</h3>
+      <p>We're based in Ayrshire. We know the area, the communities, and what local customers respond to.</p>
+    </div>
+    <div class="why-card">
+      <div class="icon">💬</div>
+      <h3>Plain English</h3>
+      <p>No agency jargon, no vanity metrics. You'll always know exactly what we've done and what it means for your business.</p>
+    </div>
+    <div class="why-card">
+      <div class="icon">📋</div>
+      <h3>No long contracts</h3>
+      <p>Monthly, rolling arrangements. Stay because it's working — not because you're locked in.</p>
+    </div>
+    <div class="why-card">
+      <div class="icon">✅</div>
+      <h3>Proven approach</h3>
+      <p>We've taken local Ayrshire businesses from zero online presence to appearing in Google searches within weeks.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY -->
+<section id="case-study">
+  <div class="section-header center">
+    <div class="section-label">Case Study</div>
+    <h2 class="section-title">Real results for a real Ayrshire business</h2>
+  </div>
+
+  <div class="case-study-box">
+    <div class="case-tag">✓ Active Client</div>
+    <h3>Sorn Handyman Services — Sorn, East Ayrshire</h3>
+    <p class="desc">Fraser and Aidan had a loyal customer base from word of mouth, but zero online presence — no Google listing, no website, and a Facebook page with the wrong category. We built their entire digital presence from scratch in Phase 1.</p>
+
+    <div class="case-stats">
+      <div class="stat">
+        <div class="num">0 → 1</div>
+        <div class="label">Google Business Profile created</div>
+      </div>
+      <div class="stat">
+        <div class="num">Week 1</div>
+        <div class="label">Fully set up and visible on Maps</div>
+      </div>
+      <div class="stat">
+        <div class="num">All of Ayrshire</div>
+        <div class="label">Coverage area now visible online</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-header center">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">Simple, honest pricing</h2>
+    <p class="section-sub">One-off setup fee included in every plan. All prices exclude VAT.</p>
+  </div>
+
+  <div class="pricing-grid">
+    <!-- Starter -->
+    <div class="pricing-card">
+      <div class="plan-name">Starter</div>
+      <div class="price">£49 <span>/ month</span></div>
+      <p class="plan-desc">Get found on Google and keep your social presence ticking.</p>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> Google Business Profile setup & management</li>
+        <li><span class="check">✓</span> 4 social media posts per month</li>
+        <li><span class="check">✓</span> Review collection support</li>
+        <li><span class="check">✓</span> Monthly performance snapshot</li>
+      </ul>
+      <a href="#contact" class="btn-plan btn-plan-outline">Get started</a>
+    </div>
+
+    <!-- Growth (featured) -->
+    <div class="pricing-card featured">
+      <div class="featured-badge">Most popular</div>
+      <div class="plan-name">Growth</div>
+      <div class="price">£149 <span>/ month</span></div>
+      <p class="plan-desc">Active social presence, Google growth, and local community engagement.</p>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> Everything in Starter</li>
+        <li><span class="check">✓</span> 12 social media posts per month</li>
+        <li><span class="check">✓</span> Local Facebook group management</li>
+        <li><span class="check">✓</span> Review collection & response</li>
+        <li><span class="check">✓</span> Monthly report & call</li>
+      </ul>
+      <a href="#contact" class="btn-plan btn-plan-filled">Get started</a>
+    </div>
+
+    <!-- Full Service -->
+    <div class="pricing-card">
+      <div class="plan-name">Full Service</div>
+      <div class="price">£299 <span>/ month</span></div>
+      <p class="plan-desc">Your full digital presence, managed end to end.</p>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> Everything in Growth</li>
+        <li><span class="check">✓</span> Website design, build & hosting</li>
+        <li><span class="check">✓</span> Content creation (photos, copy)</li>
+        <li><span class="check">✓</span> Priority support</li>
+        <li><span class="check">✓</span> Quarterly strategy session</li>
+      </ul>
+      <a href="#contact" class="btn-plan btn-plan-outline">Get started</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Ready to get your business found?</h2>
+  <p>Start with a free audit. No commitment, no sales pressure — just an honest look at where your business stands online.</p>
+
+  <div class="contact-options">
+    <a href="mailto:gridsocial.agency@gmail.com" class="contact-pill">✉️ gridsocial.agency@gmail.com</a>
+    <a href="tel:+447900000000" class="contact-pill">📞 Call us</a>
+    <a href="https://wa.me/447900000000" class="contact-pill">💬 WhatsApp</a>
+  </div>
+
+  <a href="mailto:gridsocial.agency@gmail.com" class="btn-primary">Get your free audit →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">Grid<span>Social</span></div>
+  <p>© 2026 Grid Social Ltd &nbsp;·&nbsp; Company No. SC858624 &nbsp;·&nbsp; Ayrshire, Scotland</p>
+</footer>
+
+</body>
+</html>
