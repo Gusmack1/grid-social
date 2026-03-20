@@ -1,0 +1,2 @@
+# www → non-www canonical redirect
+https://www.gridsocial.co.uk/* https://gridsocial.co.uk/:splat 301!
