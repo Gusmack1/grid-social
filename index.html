@@ -10,6 +10,12 @@
   <meta name="keywords" content="social media management Scotland, social media agency Scotland, social media management Glasgow, social media management Edinburgh, social media management Aberdeen, social media management Dundee, social media management Inverness, local business marketing Scotland, Google Business Profile Scotland, small business marketing Scotland, digital marketing agency Scotland, Facebook management Scotland, Instagram management Scotland, social media manager Scotland">
   <link rel="canonical" href="https://gridsocial.co.uk/">
 
+  <!-- ── FAVICONS ── -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#0F172A">
+
   <!-- ── OPEN GRAPH ── -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://gridsocial.co.uk/">
@@ -172,11 +178,15 @@
     }
 
     .nav-logo {
-      font-size: 1.25rem; font-weight: 700; color: var(--white);
-      letter-spacing: -0.02em;
       text-decoration: none;
+      display: flex;
+      align-items: center;
     }
-    .nav-logo span { color: var(--blue-l); }
+    .nav-logo-img {
+      height: 36px;
+      width: auto;
+      display: block;
+    }
 
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
@@ -660,7 +670,9 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">Grid<span>Social</span></a>
+  <a href="#" class="nav-logo">
+    <img src="/logo.png" alt="Grid Social" class="nav-logo-img">
+  </a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#pricing">Pricing</a></li>
