@@ -44,7 +44,13 @@
     "name": "Grid Social",
     "description": "Ayrshire's affordable social media management agency for small and local businesses. Services include Google Business Profile management, social media management, Facebook and Instagram management, and website design.",
     "url": "https://gridsocial.co.uk",
-    "email": "gridsocial.agency@gmail.com",
+    "email": "hello@gridsocial.co.uk",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "hello@gridsocial.co.uk",
+      "contactType": "customer service",
+      "areaServed": "Ayrshire"
+    },
     "image": "https://gridsocial.co.uk/og-image.jpg",
     "priceRange": "££",
     "address": {
@@ -538,6 +544,10 @@
       margin: 0.5rem 0 1.25rem;
     }
     .pricing-card.featured .plan-desc { color: rgba(255,255,255,0.55); }
+    .plan-price { font-size: 2.5rem; font-weight: 800; color: var(--navy); margin: 0.25rem 0 0.5rem; line-height: 1; }
+    .plan-freq { font-size: 1rem; font-weight: 500; color: var(--text-m); }
+    .pricing-card.featured .plan-price { color: #fff; }
+    .pricing-card.featured .plan-freq { color: rgba(255,255,255,0.6); }
 
     .plan-features {
       list-style: none;
@@ -611,6 +621,18 @@
       padding: 5rem 5%;
     }
 
+    
+    .contact-form { max-width: 540px; margin: 0 auto 1.5rem; text-align: left; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem; }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+    .contact-form input, .contact-form textarea {
+      width: 100%; padding: 0.75rem 1rem; border: 1px solid rgba(15,23,42,0.15);
+      border-radius: 8px; font-family: inherit; font-size: 0.95rem;
+      background: #fff; color: var(--navy); transition: border-color 0.2s;
+    }
+    .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--blue); }
+    .contact-form textarea { margin-bottom: 1rem; resize: vertical; }
+    .contact-form button { width: 100%; }
     #contact h2 {
       font-size: clamp(1.8rem, 3.5vw, 2.6rem);
       font-weight: 800;
@@ -852,7 +874,7 @@
     <!-- Starter -->
     <div class="pricing-card">
       <div class="plan-name">Starter</div>
-      
+      <div class="plan-price">£99<span class="plan-freq">/month</span></div>
       <p class="plan-desc">Get found on Google and keep your social presence consistently active.</p>
       <ul class="plan-features">
         <li><span class="check">✓</span> Google Business Profile setup &amp; management</li>
@@ -860,14 +882,14 @@
         <li><span class="check">✓</span> Review collection support</li>
         <li><span class="check">✓</span> Monthly performance snapshot</li>
       </ul>
-      <a href="mailto:hello@gridsocial.co.uk" class="btn-plan btn-plan-outline">Get a free quote</a>
+      <a href="https://buy.stripe.com/4gM3cxdvJ3qpeKq7fK4Rq00" class="btn-plan btn-plan-outline" target="_blank" rel="noopener">Get started →</a>
     </div>
 
     <!-- Growth (featured) -->
     <div class="pricing-card featured">
       <div class="featured-badge">Most popular</div>
       <div class="plan-name">Growth</div>
-      
+      <div class="plan-price">£199<span class="plan-freq">/month</span></div>
       <p class="plan-desc">Active social presence, Google growth, and local community engagement.</p>
       <ul class="plan-features">
         <li><span class="check">✓</span> Everything in Starter</li>
@@ -876,13 +898,13 @@
         <li><span class="check">✓</span> Review collection &amp; response</li>
         <li><span class="check">✓</span> Monthly report &amp; call</li>
       </ul>
-      <a href="mailto:hello@gridsocial.co.uk" class="btn-plan btn-plan-filled">Get a free quote</a>
+      <a href="https://buy.stripe.com/6oU9AVdvJgdb0TA43y4Rq01" class="btn-plan btn-plan-filled" target="_blank" rel="noopener">Get started →</a>
     </div>
 
     <!-- Full Service -->
     <div class="pricing-card">
       <div class="plan-name">Full Service</div>
-      
+      <div class="plan-price">£349<span class="plan-freq">/month</span></div>
       <p class="plan-desc">Your full digital presence, managed end to end.</p>
       <ul class="plan-features">
         <li><span class="check">✓</span> Everything in Growth</li>
@@ -891,7 +913,7 @@
         <li><span class="check">✓</span> Priority support</li>
         <li><span class="check">✓</span> Quarterly strategy session</li>
       </ul>
-      <a href="mailto:hello@gridsocial.co.uk" class="btn-plan btn-plan-outline">Get a free quote</a>
+      <a href="https://buy.stripe.com/cNi8wR3V99ONdGmgQk4Rq02" class="btn-plan btn-plan-outline" target="_blank" rel="noopener">Get started →</a>
     </div>
   </div>
 </section>
@@ -1001,13 +1023,26 @@
   <h2>Let's take a look at your business</h2>
   <p>We'll do a free audit of your online presence — Google, socials, competitors — and tell you exactly what's missing. No commitment, no sales pressure.</p>
 
-  <div class="contact-options">
+  <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
+    <input type="hidden" name="form-name" value="contact">
+    <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
+    <div class="form-row">
+      <input type="text" name="name" placeholder="Your name" required>
+      <input type="email" name="email" placeholder="Email address" required>
+    </div>
+    <div class="form-row">
+      <input type="text" name="business" placeholder="Business name (optional)">
+      <input type="tel" name="phone" placeholder="Phone number (optional)">
+    </div>
+    <textarea name="message" placeholder="Tell us a bit about your business and what you need help with..." rows="4"></textarea>
+    <button type="submit" class="btn-primary">Get your free audit →</button>
+  </form>
+
+  <div class="contact-options" style="margin-top:1.5rem;">
     <a href="mailto:hello@gridsocial.co.uk" class="contact-pill">✉️ hello@gridsocial.co.uk</a>
     <a href="https://www.facebook.com/profile.php?id=61577666966786" class="contact-pill" target="_blank" rel="noopener">📘 Facebook</a>
     <a href="https://www.instagram.com/gridsocial.agency/" class="contact-pill" target="_blank" rel="noopener">📸 Instagram</a>
   </div>
-
-  <a href="mailto:hello@gridsocial.co.uk" class="btn-primary">Get your free audit →</a>
 </section>
 
 <!-- FOOTER -->
@@ -1032,3 +1067,4 @@
 
 </body>
 </html>
+
