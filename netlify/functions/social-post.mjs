@@ -9,24 +9,29 @@ export default async (req) => {
   const BASE = 'https://graph.facebook.com/v25.0';
 
   try {
-    // Try to get page token, fall back to provided token
+    // Get page token - try multiple methods
     let pageToken = token;
-    try {
-      const accountsRes = await fetch(`${BASE}/me/accounts?access_token=${token}`);
-      const accountsData = await accountsRes.json();
-      if (accountsData.data && accountsData.data.length > 0) {
-        const page = accountsData.data.find(p => p.id === PAGE_ID);
-        if (page && page.access_token) {
-          pageToken = page.access_token;
-        }
-      }
-    } catch(e) {}
+    
+    // Method 1: /me/accounts
+    const acctRes = await fetch(`${BASE}/me/accounts?access_token=${token}`);
+    const acctData = await acctRes.json();
+    if (acctData.data && acctData.data.length > 0) {
+      const page = acctData.data.find(p => p.id === PAGE_ID);
+      if (page) pageToken = page.access_token;
+    }
+    
+    // Method 2: Query page directly for access token
+    if (pageToken === token) {
+      const pageRes = await fetch(`${BASE}/${PAGE_ID}?fields=access_token&access_token=${token}`);
+      const pageData = await pageRes.json();
+      if (pageData.access_token) pageToken = pageData.access_token;
+    }
 
     if (platform === 'facebook') {
       const fbParams = new URLSearchParams({ url: image_url, message: fb_text, access_token: pageToken });
       const fbRes = await fetch(`${BASE}/${PAGE_ID}/photos?${fbParams}`, { method: 'POST' });
       const fbData = await fbRes.json();
-      return Response.json({ platform: 'facebook', success: !!fbData.id, data: fbData });
+      return Response.json({ platform: 'facebook', success: !!fbData.id, data: fbData, usedPageToken: pageToken !== token });
     }
 
     if (platform === 'instagram') {
@@ -50,22 +55,18 @@ export default async (req) => {
     }
 
     if (platform === 'test') {
-      // Debug: check what token identity is
       const meRes = await fetch(`${BASE}/me?access_token=${token}`);
       const meData = await meRes.json();
-      const permsRes = await fetch(`${BASE}/me/permissions?access_token=${token}`);
-      const permsData = await permsRes.json();
-      const acctRes = await fetch(`${BASE}/me/accounts?access_token=${token}`);
-      const acctData = await acctRes.json();
-      return Response.json({ me: meData, permissions: permsData, accounts: acctData });
+      // Try getting page token directly
+      const pageRes = await fetch(`${BASE}/${PAGE_ID}?fields=access_token,name&access_token=${token}`);
+      const pageData = await pageRes.json();
+      return Response.json({ me: meData, page_direct: pageData, got_page_token: !!pageData.access_token, accounts: acctData });
     }
 
-    return Response.json({ error: 'specify platform: facebook, instagram, or test' }, { status: 400 });
+    return Response.json({ error: 'specify platform' }, { status: 400 });
   } catch (e) {
     return Response.json({ error: e.message }, { status: 500 });
   }
 };
 
-export const config = {
-  path: "/api/social-post"
-};
+export const config = { path: "/api/social-post" };
