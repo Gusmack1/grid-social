@@ -101,6 +101,22 @@
     footer .logo span { color: var(--blue-l); }
     footer p { color: rgba(255,255,255,0.3); font-size: 0.8rem; }
     @media (max-width: 640px) { .nav-links { display: none; } section { padding: 3rem 5%; } }
+
+    /* Contact form styles */
+    #contact { background: var(--dark); background-image: linear-gradient(rgba(37,99,235,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(37,99,235,0.06) 1px, transparent 1px); background-size: 44px 44px; text-align: center; padding: 5rem 5%; }
+    #contact h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800; color: var(--white); letter-spacing: -0.03em; margin-bottom: 1rem; }
+    #contact p { color: rgba(255,255,255,0.55); font-size: 1.05rem; max-width: 480px; margin: 0 auto 2rem; }
+    .contact-form { max-width: 540px; margin: 0 auto 1.5rem; text-align: left; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem; }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+    .contact-form input, .contact-form textarea { width: 100%; padding: 0.75rem 1rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; color: var(--white); font-size: 0.92rem; font-family: inherit; }
+    .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--blue); }
+    .contact-form textarea { margin-bottom: 1rem; resize: vertical; }
+    .contact-form button { width: 100%; }
+    .contact-options { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+    .contact-pill { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); padding: 0.5rem 1rem; border-radius: 99px; font-size: 0.82rem; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
+    .contact-pill:hover { border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.9); }
+
 </style>
 </head>
 <body>
@@ -168,15 +184,44 @@
   </div>
 </section>
 
-<section class="cta-section" id="contact">
-  <h2>Ready to show up on Google?</h2>
-  <p>We'll check your current Google presence for free and tell you exactly what needs fixing.</p>
-  <a href="mailto:hello@gridsocial.co.uk" class="btn-primary">Get your free audit →</a>
+<section id="contact">
+  <h2>Let's take a look at your business</h2>
+  <p>Free audit — we check your Google presence, social media, and local competitors. No commitment, no sales pressure.</p>
+
+  <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
+    <input type="hidden" name="form-name" value="contact">
+    <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
+    <div class="form-row">
+      <input type="text" name="name" placeholder="Your name" required>
+      <input type="email" name="email" placeholder="Email address" required>
+    </div>
+    <div class="form-row">
+      <input type="text" name="business" placeholder="Business name (optional)">
+      <input type="tel" name="phone" placeholder="Phone number (optional)">
+    </div>
+    <textarea name="message" placeholder="Tell us a bit about your business and what you need help with..." rows="4"></textarea>
+    <button type="submit" class="btn-primary">Get your free audit →</button>
+  </form>
+
+  <div class="contact-options" style="margin-top:1.5rem;">
+    <a href="mailto:hello@gridsocial.co.uk" class="contact-pill">✉️ hello@gridsocial.co.uk</a>
+    <a href="https://www.facebook.com/profile.php?id=61577666966786" class="contact-pill" target="_blank" rel="noopener">📘 Facebook</a>
+    <a href="https://www.instagram.com/gridsocial.agency/" class="contact-pill" target="_blank" rel="noopener">📸 Instagram</a>
+  </div>
 </section>
 
 <footer>
   <div class="logo">Grid<span>Social</span></div>
   <div class="footer-links">
+    <a href="/google-business-profile-ayrshire/">Google Business Profile</a>
+    <a href="/social-media-management-kilmarnock/">Kilmarnock</a>
+    <a href="/digital-marketing-ayr/">Ayr</a>
+    <a href="/marketing-for-plumbers-ayrshire/">Plumbers</a>
+    <a href="/marketing-for-builders-ayrshire/">Builders</a>
+    <a href="/marketing-for-electricians-ayrshire/">Electricians</a>
+    <a href="/blog/">Blog</a>
+  </div>
+  <div class="footer-links" style="margin-top:0.5rem;">
     <a href="https://www.facebook.com/profile.php?id=61577666966786" target="_blank" rel="noopener">Facebook</a>
     <a href="https://www.instagram.com/gridsocial.agency/" target="_blank" rel="noopener">Instagram</a>
     <a href="mailto:hello@gridsocial.co.uk">hello@gridsocial.co.uk</a>
