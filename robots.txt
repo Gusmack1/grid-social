@@ -2,3 +2,5 @@ User-agent: *
 Allow: /
 
 Sitemap: https://gridsocial.co.uk/sitemap.xml
+
+# Updated: 2026-03-22
