@@ -9,16 +9,18 @@ export default async (req) => {
   const BASE = 'https://graph.facebook.com/v25.0';
 
   try {
-    // Get Page Access Token from the user token
+    // Try to get page token, fall back to provided token
     let pageToken = token;
-    const accountsRes = await fetch(`${BASE}/me/accounts?access_token=${token}`);
-    const accountsData = await accountsRes.json();
-    if (accountsData.data) {
-      const page = accountsData.data.find(p => p.id === PAGE_ID);
-      if (page && page.access_token) {
-        pageToken = page.access_token;
+    try {
+      const accountsRes = await fetch(`${BASE}/me/accounts?access_token=${token}`);
+      const accountsData = await accountsRes.json();
+      if (accountsData.data && accountsData.data.length > 0) {
+        const page = accountsData.data.find(p => p.id === PAGE_ID);
+        if (page && page.access_token) {
+          pageToken = page.access_token;
+        }
       }
-    }
+    } catch(e) {}
 
     if (platform === 'facebook') {
       const fbParams = new URLSearchParams({ url: image_url, message: fb_text, access_token: pageToken });
@@ -33,14 +35,12 @@ export default async (req) => {
       const igData = await igRes.json();
 
       if (igData.id) {
-        // Poll container status until FINISHED
         for (let i = 0; i < 6; i++) {
           await new Promise(r => setTimeout(r, 2500));
           const statusRes = await fetch(`${BASE}/${igData.id}?fields=status_code&access_token=${pageToken}`);
           const statusData = await statusRes.json();
           if (statusData.status_code === 'FINISHED') break;
         }
-
         const pubParams = new URLSearchParams({ creation_id: igData.id, access_token: pageToken });
         const pubRes = await fetch(`${BASE}/${IG_ID}/media_publish?${pubParams}`, { method: 'POST' });
         const pubData = await pubRes.json();
@@ -49,11 +49,18 @@ export default async (req) => {
       return Response.json({ platform: 'instagram', success: false, data: igData });
     }
 
-    if (platform === 'get_page_token') {
-      return Response.json({ page_token: pageToken !== token ? 'found' : 'not_found', accounts: accountsData });
+    if (platform === 'test') {
+      // Debug: check what token identity is
+      const meRes = await fetch(`${BASE}/me?access_token=${token}`);
+      const meData = await meRes.json();
+      const permsRes = await fetch(`${BASE}/me/permissions?access_token=${token}`);
+      const permsData = await permsRes.json();
+      const acctRes = await fetch(`${BASE}/me/accounts?access_token=${token}`);
+      const acctData = await acctRes.json();
+      return Response.json({ me: meData, permissions: permsData, accounts: acctData });
     }
 
-    return Response.json({ error: 'specify platform: facebook or instagram' }, { status: 400 });
+    return Response.json({ error: 'specify platform: facebook, instagram, or test' }, { status: 400 });
   } catch (e) {
     return Response.json({ error: e.message }, { status: 500 });
   }
