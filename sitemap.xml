@@ -1,65 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <url>
-    <loc>https://gridsocial.co.uk/</loc>
-    <lastmod>2026-03-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-
-  <!-- Location pages -->
-  <url>
-    <loc>https://gridsocial.co.uk/google-business-profile-ayrshire/</loc>
-    <lastmod>2026-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://gridsocial.co.uk/social-media-management-kilmarnock/</loc>
-    <lastmod>2026-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://gridsocial.co.uk/digital-marketing-ayr/</loc>
-    <lastmod>2026-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Trade pages -->
-  <url>
-    <loc>https://gridsocial.co.uk/marketing-for-plumbers-ayrshire/</loc>
-    <lastmod>2026-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://gridsocial.co.uk/marketing-for-builders-ayrshire/</loc>
-    <lastmod>2026-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://gridsocial.co.uk/marketing-for-electricians-ayrshire/</loc>
-    <lastmod>2026-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Blog -->
-  <url>
-    <loc>https://gridsocial.co.uk/blog/</loc>
-    <lastmod>2026-03-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://gridsocial.co.uk/blog/google-business-profile-tradesmen-ayrshire-2026/</loc>
-    <lastmod>2026-03-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
+  <url><loc>https://gridsocial.co.uk/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://gridsocial.co.uk/google-business-profile-ayrshire/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gridsocial.co.uk/social-media-management-kilmarnock/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gridsocial.co.uk/digital-marketing-ayr/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gridsocial.co.uk/marketing-for-plumbers-ayrshire/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gridsocial.co.uk/marketing-for-builders-ayrshire/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gridsocial.co.uk/marketing-for-electricians-ayrshire/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://gridsocial.co.uk/blog/</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gridsocial.co.uk/blog/google-business-profile-tradesmen-ayrshire-2026/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://gridsocial.co.uk/blog/social-media-tradespeople-ayrshire-2026/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>
