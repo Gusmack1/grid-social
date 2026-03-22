@@ -4,18 +4,23 @@ export default async (req) => {
   }
 
   const body = await req.json();
-  const token = body.token || Netlify.env.get("META_USER_TOKEN");
+  // Try multiple env var access methods
+  const envToken = (typeof Netlify !== 'undefined' && Netlify.env) 
+    ? Netlify.env.get("META_USER_TOKEN") 
+    : (typeof process !== 'undefined' && process.env) 
+      ? process.env.META_USER_TOKEN 
+      : null;
+  const token = body.token || envToken;
   const { image_url, fb_text, ig_text, platform } = body;
   const PAGE_ID = '978717005332489';
   const IG_ID = '17841441580105982';
   const BASE = 'https://graph.facebook.com/v25.0';
 
   if (!token) {
-    return Response.json({ error: 'No token provided and META_USER_TOKEN not set' }, { status: 401 });
+    return Response.json({ error: 'No token provided and META_USER_TOKEN not set', envCheck: { hasNetlify: typeof Netlify !== 'undefined', hasProcess: typeof process !== 'undefined' } }, { status: 401 });
   }
 
   try {
-    // Get page token via direct page query
     let pageToken = token;
     try {
       const pageRes = await fetch(`${BASE}/${PAGE_ID}?fields=access_token&access_token=${token}`);
@@ -34,7 +39,6 @@ export default async (req) => {
       const params = new URLSearchParams({ image_url, caption: ig_text, access_token: pageToken });
       const res = await fetch(`${BASE}/${IG_ID}/media?${params}`, { method: 'POST' });
       const data = await res.json();
-
       if (data.id) {
         for (let i = 0; i < 6; i++) {
           await new Promise(r => setTimeout(r, 2500));
@@ -52,14 +56,10 @@ export default async (req) => {
 
     if (platform === 'both') {
       const results = [];
-      
-      // Facebook
       const fbParams = new URLSearchParams({ url: image_url, message: fb_text, access_token: pageToken });
       const fbRes = await fetch(`${BASE}/${PAGE_ID}/photos?${fbParams}`, { method: 'POST' });
       const fbData = await fbRes.json();
       results.push({ platform: 'facebook', success: !!fbData.id, id: fbData.id });
-
-      // Instagram
       const igParams = new URLSearchParams({ image_url, caption: ig_text, access_token: pageToken });
       const igRes = await fetch(`${BASE}/${IG_ID}/media?${igParams}`, { method: 'POST' });
       const igData = await igRes.json();
@@ -75,7 +75,6 @@ export default async (req) => {
         const pubData = await pub.json();
         results.push({ platform: 'instagram', success: !!pubData.id, id: pubData.id });
       }
-      
       return Response.json({ results });
     }
 
