@@ -1,11 +1,10 @@
-// Scheduled function: runs Mon-Fri at 9am UK time (8am UTC)
-// Picks the next unposted item from the queue and fires it
+// Auto-poster: fires Mon-Fri at 9am UK (8am UTC)
+// Uses date math to pick the right post from the queue
 
 export default async (req) => {
-  const META_TOKEN = Netlify.env.get("META_USER_TOKEN");
   const SITE_URL = "https://gridsocial.co.uk";
   
-  // Check if today is a weekday
+  // Check weekday
   const now = new Date();
   const day = now.getUTCDay();
   if (day === 0 || day === 6) {
@@ -13,47 +12,51 @@ export default async (req) => {
     return;
   }
 
-  // Fetch the queue
-  const queueRes = await fetch(`${SITE_URL}/data/post-queue.json`);
-  if (!queueRes.ok) {
-    console.log("Failed to fetch queue");
-    return;
-  }
-  const queue = await queueRes.json();
-
-  // Check what's been posted (stored as env var POSTED_IDS, comma-separated)
-  const postedStr = Netlify.env.get("POSTED_IDS") || "";
-  const posted = new Set(postedStr.split(",").filter(Boolean));
-
-  // Find next unposted
-  const next = queue.find(item => !posted.has(item.id));
-  if (!next) {
-    console.log("All posts in queue have been posted!");
+  // Fetch queue
+  let queue;
+  try {
+    const r = await fetch(`${SITE_URL}/data/post-queue.json`);
+    queue = await r.json();
+  } catch(e) {
+    console.log("Failed to fetch queue:", e.message);
     return;
   }
 
-  console.log(`Posting: ${next.id} — ${next.image}`);
+  // Calculate weekday index since start date (Mon 24 Mar 2026)
+  const start = new Date("2026-03-24T00:00:00Z");
+  const diffDays = Math.floor((now - start) / 86400000);
+  
+  // Count weekdays elapsed
+  let weekdays = 0;
+  for (let d = 0; d < diffDays; d++) {
+    const check = new Date(start.getTime() + d * 86400000);
+    const dow = check.getUTCDay();
+    if (dow >= 1 && dow <= 5) weekdays++;
+  }
 
-  // Post via the social-post function
-  const postRes = await fetch(`${SITE_URL}/api/social-post`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      image_url: `${SITE_URL}/social/v2/${next.image}`,
-      fb_text: next.fb,
-      ig_text: next.ig,
-      platform: "both"
-    })
-  });
+  if (weekdays >= queue.length) {
+    console.log(`Queue exhausted (${weekdays} weekdays, ${queue.length} posts). Add more content!`);
+    return;
+  }
 
-  const result = await postRes.json();
-  console.log(`Result: ${JSON.stringify(result)}`);
+  const post = queue[weekdays];
+  console.log(`Day ${weekdays}: posting ${post.id}`);
 
-  if (postRes.ok) {
-    // Mark as posted by updating env var via Netlify API
-    // (We can't update env vars from inside a function easily,
-    //  so we'll log it and the queue advances based on date math instead)
-    console.log(`✅ Posted ${next.id} successfully`);
+  try {
+    const r = await fetch(`${SITE_URL}/api/social-post`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        image_url: `${SITE_URL}/social/v2/${post.image}`,
+        fb_text: post.fb,
+        ig_text: post.ig,
+        platform: "both"
+      })
+    });
+    const result = await r.json();
+    console.log(`✅ ${post.id}: ${JSON.stringify(result)}`);
+  } catch(e) {
+    console.log(`❌ ${post.id}: ${e.message}`);
   }
 };
 
