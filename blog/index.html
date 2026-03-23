@@ -66,6 +66,13 @@
     @media (max-width: 640px) { .cards-grid { grid-template-columns: 1fr; } }
     .card { background: var(--white); border: 1px solid var(--mid); border-radius: 12px; padding: 2rem; transition: box-shadow 0.2s, border-color 0.2s; }
     .card:hover { box-shadow: 0 8px 30px rgba(15,23,42,0.08); border-color: var(--blue-l); }
+    .blog-card { background: var(--white); border: 1px solid var(--mid); border-radius: 12px; padding: 1.75rem; text-decoration: none; color: inherit; display: block; transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s; cursor: pointer; }
+    .blog-card:hover { box-shadow: 0 8px 30px rgba(15,23,42,0.08); border-color: var(--blue-l); transform: translateY(-2px); }
+    .blog-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 0.5rem; line-height: 1.35; }
+    .blog-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 0.75rem; }
+    .blog-tag { display: inline-block; background: rgba(37,99,235,0.1); color: var(--blue); border-radius: 4px; font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.5rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.75rem; }
+    .blog-read-more { display: inline-block; margin-top: 0.5rem; color: var(--blue); font-size: 0.88rem; font-weight: 600; }
+    .blog-date { display: block; margin-top: 0.75rem; color: var(--muted); font-size: 0.8rem; }
     .card-icon { width: 48px; height: 48px; background: rgba(37,99,235,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1.25rem; }
     .card h3 { font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 0.5rem; }
     .card p { color: var(--muted); font-size: 0.92rem; line-height: 1.6; }
@@ -151,37 +158,38 @@
 </div>
 
 <section class="light-section">
-  <div class="section-header">
+  <div class="section-header" style="text-align:center">
     <div class="section-label">Latest posts</div>
-    <h2 class="section-title">From the Grid Social blog</h2>
+    <h2 class="section-title" style="margin:0 auto">From the Grid Social blog</h2>
   </div>
-  <div class="cards-grid" style="max-width:900px">
+  <div class="cards-grid">
     <a href="/blog/tradespeople-invisible-google-ayrshire-2026/" class="blog-card">
-        <span class="blog-tag">Google</span>
-        <h3>Why Most Ayrshire Tradespeople Are Invisible on Google (And How to Fix It)</h3>
-        <p>5 common reasons local trades don't show up in search results — and exactly how to fix each one for free.</p>
-        <span class="blog-date">22 March 2026 &bull; 6 min read</span>
-      </a>
-
-      <a href="/blog/google-business-profile-tradesmen-ayrshire-2026/" style="text-decoration:none">
-      <div class="card">
-        <div style="display:inline-block;background:rgba(37,99,235,0.1);color:var(--blue);border-radius:4px;font-size:0.72rem;font-weight:700;padding:0.2rem 0.5rem;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.75rem">Google</div>
-        <h3 style="font-size:1.1rem;font-weight:700;color:var(--dark);margin-bottom:0.5rem;line-height:1.35">The Complete Guide to Google Business Profile for Tradesmen in Ayrshire (2026)</h3>
-        <p style="color:var(--muted);font-size:0.9rem;line-height:1.6;margin-bottom:1rem">Step-by-step: how to set up, optimise, and manage your Google Business Profile to get more calls from local Ayrshire customers — for free.</p>
-        <span style="color:var(--blue);font-size:0.88rem;font-weight:600">Read the guide →</span>
-      </div>
+      <span class="blog-tag">Local SEO</span>
+      <h3>Why Most Ayrshire Tradespeople Are Invisible on Google (And How to Fix It)</h3>
+      <p>5 common reasons local trades don’t show up in search results — and exactly how to fix each one for free.</p>
+      <span class="blog-read-more">Read more →</span>
+      <span class="blog-date">22 March 2026 · 6 min read</span>
     </a>
-    <a href="/blog/social-media-tradespeople-ayrshire-2026/" class="blog-card" style="text-decoration:none;color:inherit">
-      <div class="blog-tag">Guide</div>
-      <h3 style="font-size:1.15rem;font-weight:700;color:var(--dark);margin-bottom:0.5rem">Social Media for Tradespeople in Ayrshire — What Actually Works (2026)</h3>
-      <p style="color:var(--muted);font-size:0.9rem;line-height:1.6">You don't need to dance on TikTok. Here's what Ayrshire tradespeople should actually be doing on Facebook and Instagram to get more jobs.</p>
-      <span style="color:var(--blue);font-size:0.85rem;font-weight:600;margin-top:0.75rem;display:inline-block">Read more &rarr;</span>
+    <a href="/blog/google-business-profile-tradesmen-ayrshire-2026/" class="blog-card">
+      <span class="blog-tag">Google</span>
+      <h3>The Complete Guide to Google Business Profile for Tradesmen in Ayrshire (2026)</h3>
+      <p>Step-by-step: how to set up, optimise, and manage your Google Business Profile to get more calls from local customers.</p>
+      <span class="blog-read-more">Read the guide →</span>
+      <span class="blog-date">20 March 2026 · 8 min read</span>
     </a>
-    <a href="/blog/free-tools-ayrshire-small-business-2026/" class="blog-card" style="text-decoration:none;color:inherit">
-      <div class="blog-tag">Guide</div>
-      <h3 style="font-size:1.15rem;font-weight:700;color:var(--dark);margin-bottom:0.5rem">5 Free Tools Every Ayrshire Small Business Should Be Using (2026)</h3>
-      <p style="color:var(--muted);font-size:0.9rem;line-height:1.6">You don't need a marketing budget. These five free tools take less than an hour to set up and give you a solid online foundation.</p>
-      <span style="color:var(--blue);font-size:0.85rem;font-weight:600;margin-top:0.75rem;display:inline-block">Read more &rarr;</span>
+    <a href="/blog/social-media-tradespeople-ayrshire-2026/" class="blog-card">
+      <span class="blog-tag">Guide</span>
+      <h3>Social Media for Tradespeople in Ayrshire — What Actually Works (2026)</h3>
+      <p>You don’t need to dance on TikTok. Here’s what Ayrshire tradespeople should actually be doing on Facebook and Instagram.</p>
+      <span class="blog-read-more">Read more →</span>
+      <span class="blog-date">22 March 2026 · 7 min read</span>
+    </a>
+    <a href="/blog/free-tools-ayrshire-small-business-2026/" class="blog-card">
+      <span class="blog-tag">Tools</span>
+      <h3>5 Free Tools Every Ayrshire Small Business Should Be Using (2026)</h3>
+      <p>You don’t need a marketing budget. These five free tools give you a solid online foundation in under an hour.</p>
+      <span class="blog-read-more">Read more →</span>
+      <span class="blog-date">22 March 2026 · 5 min read</span>
     </a>
   </div>
 </section>
