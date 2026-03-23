@@ -64,7 +64,7 @@ export default async (req) => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        image_url: `${SITE_URL}/social/v2/${post.image}`,
+        image_url: `${SITE_URL}/social/v3/${post.image}`,
         fb_text: post.fb,
         ig_text: post.ig,
         platform: "both"
