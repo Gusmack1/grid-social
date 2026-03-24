@@ -1,2 +1,7 @@
 # www → non-www canonical redirect
 https://www.gridsocial.co.uk/* https://gridsocial.co.uk/:splat 301!
+
+# Hidden admin panel proxy
+/manage https://grid-social-autoposter.netlify.app/ 200!
+/manage/ https://grid-social-autoposter.netlify.app/ 200!
+/api/* https://grid-social-autoposter.netlify.app/api/:splat 200!

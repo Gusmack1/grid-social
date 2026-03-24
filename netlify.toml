@@ -30,8 +30,28 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
+# www redirect
 [[redirects]]
   from = "https://www.gridsocial.co.uk/*"
   to = "https://gridsocial.co.uk/:splat"
   status = 301
+  force = true
+
+# Hidden admin panel — proxy to auto-poster
+[[redirects]]
+  from = "/manage"
+  to = "https://grid-social-autoposter.netlify.app/"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/manage/"
+  to = "https://grid-social-autoposter.netlify.app/"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://grid-social-autoposter.netlify.app/api/:splat"
+  status = 200
   force = true

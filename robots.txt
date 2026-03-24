@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /manage
+Disallow: /api/
 
 Sitemap: https://gridsocial.co.uk/sitemap.xml
 
-# Updated: 2026-03-22
+# Updated: 2026-03-24
