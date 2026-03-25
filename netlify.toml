@@ -37,21 +37,21 @@
   status = 301
   force = true
 
-# Hidden admin panel — proxy to auto-poster
+# Dashboard redirect — sends users to auto-poster app
 [[redirects]]
   from = "/manage"
   to = "https://grid-social-autoposter.netlify.app/"
-  status = 200
+  status = 301
   force = true
 
 [[redirects]]
   from = "/manage/"
   to = "https://grid-social-autoposter.netlify.app/"
-  status = 200
+  status = 301
   force = true
 
 [[redirects]]
-  from = "/api/*"
-  to = "https://grid-social-autoposter.netlify.app/api/:splat"
-  status = 200
+  from = "/manage/*"
+  to = "https://grid-social-autoposter.netlify.app/:splat"
+  status = 301
   force = true
