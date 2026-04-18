@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit your Facebook Page — Grid Social audit</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <style>
+    :root { --ink:#0F172A; --mid:#475569; --line:#E2E8F0; --accent:#3B82F6; --bg:#F8FAFC; }
+    body { font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin:0; background:var(--bg); color:var(--ink); }
+    header { background:#fff; border-bottom:1px solid var(--line); padding:1rem 5%; }
+    header a { color:var(--ink); text-decoration:none; font-weight:700; font-size:1.1rem; }
+    main { max-width:640px; margin:3rem auto; padding:2.5rem; background:#fff; border:1px solid var(--line); border-radius:14px; box-shadow:0 1px 4px rgba(15,23,42,.04); }
+    h1 { font-size:1.7rem; margin:0 0 .5rem; }
+    p.lede { color:var(--mid); margin-top:0; }
+    label { display:block; font-weight:600; margin:1.2rem 0 .4rem; font-size:.95rem; }
+    input[type=text], input[type=email], input[type=url] {
+      width:100%; padding:.8rem 1rem; border:1px solid var(--line); border-radius:8px; font-size:1rem; box-sizing:border-box;
+    }
+    input:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(59,130,246,.18); }
+    .hint { color:var(--mid); font-size:.85rem; margin-top:.3rem; }
+    button {
+      background:var(--accent); color:#fff; border:none; border-radius:8px;
+      padding:.9rem 1.6rem; font-size:1rem; font-weight:600; cursor:pointer; margin-top:1.5rem; width:100%;
+    }
+    button[disabled] { opacity:.6; cursor:not-allowed; }
+    .ok, .err { margin-top:1.2rem; padding:1rem 1.2rem; border-radius:8px; font-size:.95rem; }
+    .ok { background:#ECFDF5; border:1px solid #10B981; color:#065F46; }
+    .err { background:#FEF2F2; border:1px solid #EF4444; color:#991B1B; }
+    .hidden { display:none; }
+  </style>
+</head>
+<body>
+  <header><a href="/">Grid Social</a></header>
+  <main>
+    <h1>Thanks — one last step</h1>
+    <p class="lede">Payment received. Drop your public Facebook Page URL below and we'll email your audit within 24 hours.</p>
+
+    <form id="audit-form" autocomplete="on" novalidate>
+      <label for="fbPageUrl">Your Facebook Page URL</label>
+      <input type="url" id="fbPageUrl" name="fbPageUrl" required placeholder="https://www.facebook.com/YourBusinessPage">
+      <div class="hint">Must be a public Page, not a personal profile. Example: https://www.facebook.com/SornHandymanServices</div>
+
+      <label for="email">Delivery email <span style="color:var(--mid);font-weight:400;">(optional — we'll use the one from Stripe if blank)</span></label>
+      <input type="email" id="email" name="email" placeholder="you@example.com">
+
+      <button id="submit-btn" type="submit">Send me my audit</button>
+
+      <div id="status" class="hidden"></div>
+    </form>
+  </main>
+
+  <script>
+    (function () {
+      // API is hosted on the autoposter site (has all the credentials);
+      // CORS is open, so this cross-origin POST just works.
+      var API_BASE = 'https://grid-social-autoposter.netlify.app';
+
+      function qs(name) {
+        var m = window.location.search.match(new RegExp('[?&]' + name + '=([^&]+)'));
+        return m ? decodeURIComponent(m[1]) : '';
+      }
+
+      var sessionId = qs('session');
+      var form = document.getElementById('audit-form');
+      var statusEl = document.getElementById('status');
+      var btn = document.getElementById('submit-btn');
+
+      if (!sessionId) {
+        statusEl.className = 'err';
+        statusEl.textContent = 'Missing Stripe session id. If you just paid, please come back via the Stripe success page.';
+        statusEl.classList.remove('hidden');
+        btn.disabled = true;
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        statusEl.className = 'hidden';
+        statusEl.textContent = '';
+        var fbPageUrl = document.getElementById('fbPageUrl').value.trim();
+        var email = document.getElementById('email').value.trim();
+        if (!fbPageUrl) { return; }
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+
+        fetch(API_BASE + '/api/audit-submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ session: sessionId, fbPageUrl: fbPageUrl, email: email || undefined }),
+        })
+          .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, body: j }; }); })
+          .then(function (x) {
+            if (x.ok && x.body.ok) {
+              window.location.href = '/audit/thanks/?id=' + encodeURIComponent(x.body.auditId || '');
+              return;
+            }
+            statusEl.className = 'err';
+            statusEl.textContent = (x.body && x.body.error) || 'Something went wrong. Please email hello@gridsocial.co.uk with your Stripe receipt.';
+            statusEl.classList.remove('hidden');
+            btn.disabled = false;
+            btn.textContent = 'Send me my audit';
+          })
+          .catch(function (err) {
+            statusEl.className = 'err';
+            statusEl.textContent = 'Network error: ' + err.message + '. Please email hello@gridsocial.co.uk with your Stripe receipt.';
+            statusEl.classList.remove('hidden');
+            btn.disabled = false;
+            btn.textContent = 'Send me my audit';
+          });
+      });
+    })();
+  </script>
+</body>
+</html>
